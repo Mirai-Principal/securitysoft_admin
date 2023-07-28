@@ -12,7 +12,7 @@ Ingresar |
 
 {# bloque del contenido de cada vista #}
 {% block contenido %}
-<div class="container h-100">
+<div class="container vh-100 bg-secondary bg-opacity-10">
   <div class="row text-center">
     <div class="col">
       <h1>Proveedor de seguridad</h1>
@@ -27,7 +27,7 @@ Ingresar |
         </div>
         <div class="card-body text-center">
           <form action="/" method="post">
-            <input type="text" placeholder="Usuario" class="form-control" name="user_name" required>
+            <input type="text" placeholder="RUC" class="form-control" name="ruc" required>
             <input type="password" placeholder="Contraseña" class="form-control" name="password" required>
             <input type="submit" value="Ingresar" class="btn btn-primary form-control w-50 mt-4">
           </form>

@@ -12,10 +12,6 @@ use Respect\Validation\Validator as v;
 class DashboardController extends CoreController
 {
 
-    public function getReportarAction()
-    {
-        return $this->renderHTML('reportar.twig');
-    }
 
     public function postEstadoAction(ServerRequest $request) {
         $responseMessage = null;    //var para recuperar los mesajes q suceda durante la ejecucion
@@ -62,43 +58,30 @@ class DashboardController extends CoreController
         return $this->jsonReturn($respuesta);
     }
 
-    public function postFormNotificacionAction(ServerRequest $request)
-    {
-        $responseMessage = null;    //var para recuperar los mesajes q suceda durante la ejecucion
-
-        if ($request->getMethod() == "POST") {
-            $postData = $request->getParsedBody();
-
-            $passMasterValidator = v::key('emergenciaTipo', v::stringType()->notEmpty());
-
-            try {
-                $passMasterValidator->assert($postData);
-
-                $notificaciones = new notificaciones();
-
-                $notificaciones->tipo = $postData['emergenciaTipo'];
-                $notificaciones->save();
-                $responseMessage = 'Se ha guardado con éxito';
-                $headers = array(
-                    'responseMessage' => $responseMessage
-                );
-
-                return new RedirectResponse('/reportado', 301, $headers);
-
-            } catch (\Exception $e) {
-                // $responseMessage = $e->getMessage();
-                $responseMessage = 'Ha ocurrido un error! Informe a soporte';
-            }
-        }
-    }
-
 
     public function getDashboardAction()
     {
-        $reportes = notificaciones::where('estado', '!=', 'Finalizado')->get();
+        $reportes = notificaciones::join('clientes', 'notificaciones.id_cliente', '=', 'clientes.id_cliente')
+            ->select('notificaciones.*', 'clientes.nombres as cliente_nombres', 'clientes.cedula')
+            ->orderBy('notificaciones.created_at', 'desc')
+            ->get();
+        //$reportes = notificaciones::where('estado', '!=', 'Finalizado')->get();
         return $this->renderHTML('dashboard.twig', array(
             'reportes' => $reportes,
             "session" => $_SESSION
         ));
+    }
+
+    public function getNotificacionData(ServerRequest $request){
+        $respuesta = null;
+        if ($request->getMethod() == "GET") {
+            $id = $request->getAttribute('id');
+            $respuesta = notificaciones::join('clientes', 'notificaciones.id_cliente', '=', 'clientes.id_cliente')
+                ->select('notificaciones.*', 'clientes.nombres as cliente_nombres', 'clientes.cedula')
+                ->where("id_notificacion", $id)
+                ->first();
+        }
+
+        return $this->jsonReturn($respuesta);
     }
 }

@@ -11,9 +11,10 @@ use Respect\Validation\Validator as v;
 
 class IndexController extends CoreController{
     public function indexAction(){
-        return $this->renderHTML('index.twig', [
-            "session" => $_SESSION
-        ]);
+        if( isset($_SESSION['ruc']) )
+            return new RedirectResponse('/dashboard');
+        else
+            return $this->renderHTML('index.twig');
     }
 
     public function postLoginAction(ServerRequest $request){
@@ -21,7 +22,7 @@ class IndexController extends CoreController{
 
         if ($request->getMethod() == "POST") {
             $postData = $request->getParsedBody();
-            $usuariosValidator = v::key('user_name', v::stringType()->noWhitespace()->notEmpty())
+            $usuariosValidator = v::key('ruc', v::stringType()->noWhitespace()->notEmpty())
             ->key('password', v::stringType()->notEmpty()->noWhitespace());
 
             try {
@@ -29,7 +30,7 @@ class IndexController extends CoreController{
 
                 $usuario = new usuarios();
                 $existeusuario = $usuario
-                                ->where("user_name", $postData['user_name'])
+                                ->where("ruc", $postData['ruc'])
                                 ->first();
                 if( $existeusuario )
                     if ( password_verify( $postData['password'], $existeusuario->password) ){
@@ -55,7 +56,10 @@ class IndexController extends CoreController{
     }
 
     public function getFormSignupAction(){
-        return $this->renderHTML('signup.twig');
+        if( isset($_SESSION['ruc']) )
+            return new RedirectResponse('/dashboard');
+        else
+            return $this->renderHTML('signup.twig');
     }
 
     public function postSignupAction(ServerRequest $request){
@@ -65,7 +69,7 @@ class IndexController extends CoreController{
             $postData = $request->getParsedBody();
 
             $validator = v::key('password_nuevo', v::stringType()->noWhitespace()->notEmpty())
-            ->key('usuario_nuevo', v::stringType()->notEmpty()->noWhitespace())
+            ->key('telefono', v::stringType()->notEmpty()->noWhitespace())
             ->key('ruc', v::stringType()->notEmpty()->noWhitespace())
             ->key('nombre_empresa', v::stringType()->notEmpty());
             
@@ -77,7 +81,7 @@ class IndexController extends CoreController{
                 $usuario = new usuarios();
                 $usuario->ruc = $postData['ruc'];
                 $usuario->nombre_proveedor = $postData['nombre_empresa'];
-                $usuario->user_name = $postData['usuario_nuevo'];
+                $usuario->telefono = $postData['telefono'];
                 $postData['password_nuevo'] = password_hash($postData['password_nuevo'], PASSWORD_DEFAULT );
                 $usuario->password = $postData['password_nuevo'];
                 

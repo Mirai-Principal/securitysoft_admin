@@ -27,19 +27,11 @@
   padding-right: 10px;
 }
 
-body{
-  height: 100vh;
-}
 
 .footer-container{
   display: flex;
   justify-content: center;
 }
 
-.footer{
-  position: fixed;
-  bottom: 0;
-  z-index: 10;
-}
 
 

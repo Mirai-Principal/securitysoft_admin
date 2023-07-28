@@ -10,8 +10,8 @@ session_start();
 
 //usando vars de entorno pa acceder a la config de la base
 //? estas dos lineas no necesita un servidor si ya tiene configurado en su sistema las variables de entorno como heroku
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
-$dotenv->load();
+//$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
+//$dotenv->load();
 
 //? conexion con la base de datos con eloquent
 use Illuminate\Database\Capsule\Manager as Capsule;
@@ -83,6 +83,11 @@ $map->get('dashboard', $dir_raiz.'dashboard', [
  $map->post('cambiarEstadoNotificacion', $dir_raiz . 'notificaciones/update', [
     "controller" => "App\Controllers\DashboardController",
     "action" => "postEstadoAction",
+    "auth" => true
+]);
+$map->get('NotificacionData', $dir_raiz.'notificaciones/read/{id}', [
+    "controller" => "App\Controllers\DashboardController",
+    "action" => "getNotificacionData",
     "auth" => true
 ]);
 
