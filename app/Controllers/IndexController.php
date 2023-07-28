@@ -117,5 +117,17 @@ class IndexController extends CoreController{
         session_destroy();
         return new RedirectResponse('/');
     }
+
+    public function getTerminosYCondiciones(){
+        return $this->renderHTML('terminos.twig', [
+            'session' => $_SESSION
+        ]);
+    }
+
+    public function getSobreNosotros(){
+        return $this->renderHTML('sobreNosotros.twig', [
+            'session' => $_SESSION
+        ]);
+    }
 }
 

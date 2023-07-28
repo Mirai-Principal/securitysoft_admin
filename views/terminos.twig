@@ -1,0 +1,90 @@
+{% extends "main.twig" %}
+{% block title %}
+Reportado |
+{{ parent() }}
+{% endblock %}
+
+{# bloque de estilos #}
+{% block styles %}
+<style>
+            .repotado_done{
+                font-size: 10em;
+                color: green;
+            }
+
+            .resspuesta{
+                padding: 50px 0;
+                
+            }
+            
+            
+        </style>
+{% endblock %}
+
+{# bloque del contenido de cada vista #}
+{% block contenido %}
+<div class="container min-vh-100  bg-secondary bg-opacity-10">
+    <div class="text-center resspuesta">
+        <h1>Terminos y condiciones</h1>
+        <article>
+            <pre>
+Los términos y condiciones de uso son un acuerdo legal entre los
+usuarios y nuestra empresa que establecen las reglas y condiciones
+para el uso de nuestra aplicación. Al utilizar nuestra aplicación,
+los usuarios aceptan cumplir con estos términos y condiciones.
+
+Uso autorizado: Nuestra aplicación está destinada para uso personal
+y comercial. Los usuarios deben cumplir con todas las leyes y
+regulaciones aplicables al utilizar nuestra plataforma.
+
+Registro: Al registrarse en nuestra aplicación, los usuarios deben
+proporcionar información precisa y actualizada. Los usuarios son
+responsables de mantener la confidencialidad de su cuenta y
+contraseña.
+
+Contenido del usuario: Los usuarios son los únicos responsables del
+contenido que publiquen en nuestra aplicación. No permitimos
+contenido ilegal, ofensivo o que infrinja los derechos de terceros.
+
+Propiedad intelectual: Todos los derechos de propiedad intelectual
+relacionados con nuestra aplicación, incluidos diseños, logotipos, y
+contenido, son propiedad exclusiva de nuestra empresa.
+
+Privacidad: Respetamos la privacidad de nuestros usuarios. Consulta
+nuestra política de privacidad para obtener más información sobre
+cómo recopilamos, usamos y protegemos tus datos personales.
+
+Enlaces externos: Nuestra aplicación puede contener enlaces a sitios
+web de terceros. No nos responsabilizamos por el contenido o las
+prácticas de privacidad de esos sitios.
+
+Limitación de responsabilidad: Nuestra empresa no se hace
+responsable de cualquier daño, pérdida o lesión derivada del uso de
+nuestra aplicación.
+
+Modificaciones: Nos reservamos el derecho de modificar o
+discontinuar nuestra aplicación en cualquier momento sin previo
+aviso.
+
+Rescisión: Podemos rescindir o suspender el acceso de un usuario a
+nuestra aplicación si incumple estos términos y condiciones.
+
+Jurisdicción: Estos términos y condiciones se rigen por las leyes
+del país donde nuestra empresa está registrada, y cualquier disputa
+se resolverá en los tribunales competentes de esa jurisdicción.
+
+Al acceder y utilizar nuestra aplicación, los usuarios aceptan estar
+legalmente vinculados por estos términos y condiciones. Es
+importante que los usuarios lean y comprendan estos términos antes
+de utilizar nuestra aplicación. Si no están de acuerdo con algún
+aspecto de estos términos, les pedimos que no utilicen nuestra
+aplicación.
+            </pre>
+        </article>
+    </div>
+</div>
+{% endblock contenido %}
+
+{% block footer %}
+{{ parent() }}
+{% endblock footer %}

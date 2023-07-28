@@ -1,0 +1,52 @@
+{% extends "main.twig" %}
+{% block title %}
+Reportado |
+{{ parent() }}
+{% endblock %}
+
+{# bloque de estilos #}
+{% block styles %}
+<style>
+            .repotado_done{
+                font-size: 10em;
+                color: green;
+            }
+
+            .resspuesta{
+                padding: 50px 0;
+                
+            }
+            
+            
+        </style>
+{% endblock %}
+
+{# bloque del contenido de cada vista #}
+{% block contenido %}
+<div class="container min-vh-100  bg-secondary bg-opacity-10">
+    <div class="text-center resspuesta">
+        <h1>Sobre nuestro equipo</h1>
+        <section>
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="../public/uploads/darwin.jpg" alt="" class="img-fluid w-50">
+                    <h2>Dawrin Bayas</h2>
+                    <h4>CEO - Director General</h4>
+                    <h4>Desarrollador de software</h4>
+                </div>
+                <div class="col-md-6">
+                    <img src="../public/uploads/jhon.jpeg" alt="" class="img-fluid w-50">
+                    <h2>John Ichina</h2>
+                    <h4>Analista y diseñador</h4>
+                    <h4>Control de calidad</h4>
+                </div>
+                
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock contenido %}
+
+{% block footer %}
+{{ parent() }}
+{% endblock footer %}
